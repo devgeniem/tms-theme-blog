@@ -3,6 +3,8 @@
  *  Copyright (c) 2021. Geniem Oy
  */
 
+namespace TMS\Theme\Blog;
+
 /**
  * Remove 'use_box' field from front page hero admin
  */
@@ -18,3 +20,29 @@ add_filter( 'tms/acf/layout/hero/data', function ( $layout ) {
 
     return $layout;
 }, 0, 1 );
+
+/**
+ * Remove social media layout from components
+ */
+add_filter( 'tms/acf/field/fg_onepager_components_components/layouts', __NAMESPACE__ . '\remove_social_media_layout' );
+add_filter( 'tms/acf/field/fg_page_components_components/layouts', __NAMESPACE__ . '\remove_social_media_layout' );
+add_filter( 'tms/acf/field/fg_front_page_components_components/layouts', __NAMESPACE__ . '\remove_social_media_layout' ); // phpcs:ignore
+add_filter( 'tms/acf/field/fg_post_fields_components/layouts', __NAMESPACE__ . '\remove_social_media_layout' );
+add_filter( 'tms/acf/field/fg_dynamic_event_fields_components/layouts', __NAMESPACE__ . '\remove_social_media_layout' );
+
+/**
+ * Remove social media layout from components
+ *
+ * @param array $layouts ACF Layouts.
+ *
+ * @return array
+ */
+function remove_social_media_layout( array $layouts ) : array {
+    foreach ( $layouts as $key => $layout ) {
+        if ( false !== strpos( $layout, 'SocialMediaLayout' ) ) {
+            unset( $layouts[ $key ] );
+        }
+    }
+
+    return $layouts;
+}
