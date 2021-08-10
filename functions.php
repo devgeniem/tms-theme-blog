@@ -46,3 +46,17 @@ function remove_social_media_layout( array $layouts ) : array {
 
     return $layouts;
 }
+
+/**
+ * Remove share links from posts
+ */
+add_filter( 'tms/theme/share_links', fn() => false );
+
+/**
+ * Remove share links ACF block
+ */
+add_filter( 'tms/gutenberg/blocks', function ( $allowed_blocks ) {
+    unset( $allowed_blocks['acf/share-links'] );
+
+    return $allowed_blocks;
+} );
