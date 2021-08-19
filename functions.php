@@ -9,7 +9,7 @@ namespace TMS\Theme\Blog;
  * Remove 'use_box' field from front page hero admin
  */
 add_filter( 'tms/acf/layout/fg_front_page_components_hero/fields', function ( $fields ) {
-    return array_filter( $fields, fn( $field ) => 'use_box' !== $field->get_name() );
+    return array_filter( $fields, fn( $f) => ! in_array( $f->get_name(), [ 'use_box', 'video' ], true ) );
 } );
 
 /**
