@@ -60,3 +60,17 @@ add_filter( 'tms/gutenberg/blocks', function ( $allowed_blocks ) {
 
     return $allowed_blocks;
 } );
+
+/**
+ * Fix CSS and JS paths to use root theme (tms-theme-base) paths.
+ */
+add_filter(
+    'tms/theme/theme_css_path',
+    fn( $full, $file ) => get_template_directory_uri() . '/assets/dist/' . $file, // phpcs:ignore
+    10, 2
+);
+add_filter(
+    'tms/theme/theme_js_path',
+    fn( $full, $file ) => get_template_directory_uri() . '/assets/dist/' . $file, // phpcs:ignore
+    10, 2
+);
