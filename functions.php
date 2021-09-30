@@ -74,3 +74,8 @@ add_filter(
     fn( $full, $file ) => get_template_directory_uri() . '/assets/dist/' . $file, // phpcs:ignore
     10, 2
 );
+add_filter(
+    'tms/theme/admin_js_path',
+    fn( $full, $file ) => get_template_directory_uri() . '/assets/dist/' . $file, // phpcs:ignore
+    10, 2
+);
