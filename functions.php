@@ -74,3 +74,23 @@ add_filter(
     fn( $full, $file ) => get_template_directory_uri() . '/assets/dist/' . $file, // phpcs:ignore
     10, 2
 );
+
+/**
+ * Change the Excerpt field label and description for Blog Author CPT
+ */
+add_action( 'current_screen', function() {
+    add_filter( 'gettext', function( $translation, $original ) {
+        if ( \get_current_screen()->post_type !== 'blog-author' ) {
+            return $translation;
+        }
+
+        if ( $original === 'Excerpt' ) {
+            $translation = 'Kuvaus';
+        }
+        elseif ( strpos( $original, 'Excerpts are optional' ) !== false ) {
+            $translation = '';
+        }
+
+        return $translation;
+    }, 10, 2 );
+} );
