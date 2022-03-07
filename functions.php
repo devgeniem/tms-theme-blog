@@ -30,6 +30,9 @@ add_filter( 'tms/acf/field/fg_front_page_components_components/layouts', __NAMES
 add_filter( 'tms/acf/field/fg_post_fields_components/layouts', __NAMESPACE__ . '\remove_social_media_layout' );
 add_filter( 'tms/acf/field/fg_dynamic_event_fields_components/layouts', __NAMESPACE__ . '\remove_social_media_layout' );
 
+add_filter( 'tms/acf/field/fg_page_components_components/layouts', __NAMESPACE__ . '\remove_share_links_layout' );
+add_filter( 'tms/acf/field/fg_front_page_components_components/layouts', __NAMESPACE__ . '\remove_share_links_layout' ); // phpcs:ignore
+
 /**
  * Remove social media layout from components
  *
@@ -41,6 +44,24 @@ function remove_social_media_layout( array $layouts ) : array {
     foreach ( $layouts as $key => $layout ) {
         if ( false !== strpos( $layout, 'SocialMediaLayout' ) ) {
             unset( $layouts[ $key ] );
+        }
+    }
+
+    return $layouts;
+}
+
+/**
+ * Remove share links layout from components
+ *
+ * @param array $layouts ACF Layouts.
+ *
+ * @return array
+ */
+function remove_share_links_layout( array $layouts ) : array {
+    foreach ( $layouts as $key => $layout ) {
+        if ( false !== strpos( $layout, 'ShareLinksLayout' ) ) {
+            unset( $layouts[ $key ] );
+            break;
         }
     }
 
