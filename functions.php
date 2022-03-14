@@ -33,6 +33,10 @@ add_filter( 'tms/acf/field/fg_dynamic_event_fields_components/layouts', __NAMESP
 add_filter( 'tms/acf/field/fg_page_components_components/layouts', __NAMESPACE__ . '\remove_share_links_layout' );
 add_filter( 'tms/acf/field/fg_front_page_components_components/layouts', __NAMESPACE__ . '\remove_share_links_layout' ); // phpcs:ignore
 
+add_filter( 'tms/acf/field/fg_page_components_components/layouts', __NAMESPACE__ . '\remove_accessibility_icon_links_layout' );
+add_filter( 'tms/acf/field/fg_front_page_components_components/layouts', __NAMESPACE__ . '\remove_accessibility_icon_links_layout' ); // phpcs:ignore
+add_filter( 'tms/acf/field/fg_onepager_components_components/layouts', __NAMESPACE__ . '\remove_accessibility_icon_links_layout' ); // phpcs:ignore
+
 /**
  * Remove social media layout from components
  *
@@ -69,15 +73,34 @@ function remove_share_links_layout( array $layouts ) : array {
 }
 
 /**
+ * Remove AccessibilityIconLinks from components
+ *
+ * @param array $layouts ACF Layouts.
+ *
+ * @return array
+ */
+function remove_accessibility_icon_links_layout( array $layouts ) : array {
+    foreach ( $layouts as $key => $layout ) {
+        if ( false !== strpos( $layout, 'AccessibilityIconLinksLayout' ) ) {
+            unset( $layouts[ $key ] );
+            break;
+        }
+    }
+
+    return $layouts;
+}
+
+/**
  * Remove share links from posts
  */
 add_filter( 'tms/theme/share_links', fn() => false );
 
 /**
- * Remove share links ACF block
+ * Remove ACF blocks
  */
 add_filter( 'tms/gutenberg/blocks', function ( $allowed_blocks ) {
     unset( $allowed_blocks['acf/share-links'] );
+    unset( $allowed_blocks['acf/acc-icon-links'] );
 
     return $allowed_blocks;
 } );
