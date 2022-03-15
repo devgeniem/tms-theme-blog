@@ -7,10 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.3.0] - 2021-03-15
 ### Removed
 - TMS-422: Remove AccessibilityIconLinks layout and block.
 
-## [1.2.0] - 2021-10-15
+## [1.2.0] - 2021-03-15
 
 ### Removed
 - TMS-715-1: Remove ShareLinks.
