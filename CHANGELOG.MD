@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.3.1] - 2022-08-23
+
+### Fixed
+
+- TMS-894: Fix composer
+
 ## [1.3.0] - 2021-03-15
+
 ### Removed
 - TMS-422: Remove AccessibilityIconLinks layout and block.
 
